@@ -1,6 +1,5 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import React from 'react';
 import { FaStar, FaDownload } from 'react-icons/fa';
 import { PiDownloadSimpleBold } from 'react-icons/pi';
 
