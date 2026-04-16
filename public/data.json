@@ -17,24 +17,7 @@
       { "name": "5 star", "count": 136000000 }
     ]
   },
-  {
-    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/Spotify_logo_without_text.svg/1200px-Spotify_logo_without_text.svg.png",
-    "title": "Spotify: Music and Podcasts",
-    "companyName": "Spotify AB",
-    "id": 2,
-    "description": "Spotify gives you instant access to millions of songs, albums, and podcasts from artists all over the world. Stream your favorite tracks, discover new music, and build playlists with ease. With personalized recommendations, offline playback, and high-quality audio, Spotify makes it simple to enjoy the perfect soundtrack to your life—anytime, anywhere.",
-    "size": 110,
-    "reviews": "32000K",
-    "ratingAvg": 4.4,
-    "downloads": "1000M",
-    "ratings": [
-      { "name": "1 star", "count": 1200000 },
-      { "name": "2 star", "count": 1800000 },
-      { "name": "3 star", "count": 4200000 },
-      { "name": "4 star", "count": 9800000 },
-      { "name": "5 star", "count": 14900000 }
-    ]
-  },
+  
   {
     "image": "https://png.pngtree.com/png-clipart/20180626/ourmid/pngtree-instagram-icon-instagram-logo-png-image_3584853.png",
     "title": "Instagram",

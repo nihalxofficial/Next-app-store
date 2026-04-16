@@ -18,6 +18,8 @@ const AppCard = ({app}) => {
                 <Image 
                     src={app.image} 
                     alt={app.title} 
+                    width={160}
+                    height={160}
                     className='w-full h-40 object-contain transform group-hover:scale-110 transition-transform duration-500'
                 />
                 {/* Image Overlay Glow */}
