@@ -1,3 +1,5 @@
+"use client"
+
 import  { useContext } from 'react';
 import useApps from '../../hooks/useApps';
 import { PiDownloadSimpleBold } from 'react-icons/pi';
@@ -19,10 +21,10 @@ import {
   BarChart
 } from 'recharts';
 import Image from 'next/image';
+import { useParams } from 'next/navigation';
 
-const AppDetails = ({params}) => {
-    const {id} = params
-    console.log(id);
+const AppDetails = () => {
+    const {id} = useParams()
     
     const {apps, loading} = useApps();
     const expectedApp = apps.find(app => String(app.id) === id)
@@ -87,8 +89,8 @@ const AppDetails = ({params}) => {
                     <div className="text-6xl">🔍</div>
                     <h2 className="text-2xl font-bold text-gray-800">App Not Found</h2>
                     <p className="text-gray-600">The app you're looking for doesn't exist.</p>
-                    <Link to="/apps">
-                        <button className="px-6 py-2 rounded-full bg-gradient-to-r from-purple-600 to-blue-600 text-white font-semibold hover:scale-105 transition-all duration-300">
+                    <Link href="/apps">
+                        <button className="px-6 py-2 rounded-full cursor-pointer bg-gradient-to-r from-purple-600 to-blue-600 text-white font-semibold hover:scale-105 transition-all duration-300">
                             Back to Apps
                         </button>
                     </Link>
@@ -105,7 +107,7 @@ const AppDetails = ({params}) => {
             
             <div className='container mx-auto px-4 relative z-10'>
                 {/* Back Button */}
-                <Link to="/apps" className='inline-flex items-center gap-2 mb-6 text-purple-600 hover:text-purple-700 transition-colors duration-300 group'>
+                <Link href="/apps" className='inline-flex items-center gap-2 mb-6 text-purple-600 hover:text-purple-700 transition-colors duration-300 group'>
                     <FaArrowLeft className='group-hover:-translate-x-1 transition-transform duration-300' />
                     <span className='font-semibold'>Back to Apps</span>
                 </Link>
@@ -121,6 +123,8 @@ const AppDetails = ({params}) => {
                                     <Image 
                                         src={expectedApp?.image} 
                                         alt={expectedApp?.title} 
+                                        width={200}
+                                        height={200}
                                         className='w-full h-full object-contain transform hover:scale-105 transition-transform duration-500'
                                     />
                                 </div>
