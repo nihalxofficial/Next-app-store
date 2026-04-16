@@ -3,11 +3,11 @@
 // import React, { use, useEffect, useState } from 'react';
 // import { useLoaderData } from 'react-router';
 import AppCard from './AppCard';
-import { HashLoader } from 'react-spinners';
 import useApps from '../hooks/useApps';
 import Link from 'next/link';
+import Skeleton from './Skeleton';
 
-const appsPromise = fetch("/data.json").then((res) => res.json())
+// const appsPromise = fetch("/data.json").then((res) => res.json())
 const TrendingApps = () => {
 
     const {apps, loading} = useApps()
@@ -36,8 +36,10 @@ const TrendingApps = () => {
                 
                 {/* Loading or Apps Grid */}
                 {loading ? (
-                    <div className='flex justify-center items-center min-h-100'>
-                        <HashLoader color="#7C3AED" size={60} />
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 min-h-[400px]">
+                        {Array.from({ length: 8 }).map((_, index) => (
+                            <Skeleton key={index} />
+                        ))}
                     </div>
                 ) : (
                     <>

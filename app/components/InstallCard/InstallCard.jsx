@@ -1,9 +1,12 @@
-import React, { useContext } from 'react';
+"use client"
+
+import  { useContext } from 'react';
 import { InstalledAppsContext } from '../../context/InstalledAppsContext';
 import { toast } from 'react-toastify';
 import { FaStar, FaTrashAlt, FaDownload, FaExternalLinkAlt } from 'react-icons/fa';
 import { PiDownloadSimpleBold } from 'react-icons/pi';
-import { Link } from 'react-router';
+import Link from 'next/link';
+import Image from 'next/image';
 
 const InstallCard = ({app}) => {
     const {installApps, setInstallApps} = useContext(InstalledAppsContext)
@@ -24,16 +27,18 @@ const InstallCard = ({app}) => {
                 <div className='flex flex-col sm:flex-row items-center gap-4 flex-grow'>
                     {/* App Icon */}
                     <div className='bg-gradient-to-br from-purple-50 to-blue-50 rounded-xl h-20 w-20 p-2 flex items-center justify-center shadow-md group-hover:shadow-lg transition-all duration-300'>
-                        <img 
+                        <Image 
                             src={app.image} 
                             alt={app.title} 
-                            className='w-full h-full object-contain transform group-hover:scale-110 transition-transform duration-500'
+                            width={500}
+                            height={500}
+                            className='w-full h-full object-contain rounded-xl transform group-hover:scale-110 transition-transform duration-500'
                         />
                     </div>
                     
                     {/* App Details */}
                     <div className='space-y-2 text-center sm:text-left'>
-                        <Link to={`/apps/${app.id}`}>
+                        <Link href={`/apps/${app.id}`}>
                             <h2 className='font-bold text-xl text-gray-800 hover:text-purple-600 transition-colors duration-300'>
                                 {app.title}
                             </h2>
