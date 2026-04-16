@@ -3,6 +3,7 @@
 import AppCard from '../components/AppCard';
 import { HashLoader } from 'react-spinners';
 import useApps from '../hooks/useApps';
+import Skeleton from '../components/Skeleton';
 
 const AppsPage = () => {
     const {apps, loading} = useApps()
@@ -40,8 +41,10 @@ const AppsPage = () => {
                 
                 {/* Loading or Apps Grid */}
                 {loading ? (
-                    <div className='flex justify-center items-center min-h-[400px]'>
-                        <HashLoader color="#7C3AED" size={80} />
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 min-h-[400px]">
+                        {Array.from({ length: 8 }).map((_, index) => (
+                            <Skeleton key={index} />
+                        ))}
                     </div>
                 ) : (
                     <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 max-w-7xl mx-auto'>
