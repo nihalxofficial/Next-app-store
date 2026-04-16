@@ -1,16 +1,15 @@
 "use client"
 
-import  { useContext } from 'react';
+import  { useContext, useEffect, useState } from 'react';
 import useApps from '../../hooks/useApps';
 import { PiDownloadSimpleBold } from 'react-icons/pi';
 import { TbFileLike } from 'react-icons/tb';
-import { FaStar, FaArrowLeft } from 'react-icons/fa';
+import { FaStar, FaArrowLeft, FaCheck } from 'react-icons/fa';
 import { InstalledAppsContext } from '../../context/InstalledAppsContext';
 import { toast } from 'react-toastify';
 import Link from 'next/link';
 
 import {
-//   BarChart,
   Bar,
   XAxis,
   YAxis,
@@ -30,12 +29,24 @@ const AppDetails = () => {
     const expectedApp = apps.find(app => String(app.id) === id)
 
     const {installApps, setInstallApps} = useContext(InstalledAppsContext)
+    const [isInstalled, setIsInstalled] = useState(false);
+
+    // Check if app is already installed when component loads or installApps changes
+    useEffect(() => {
+        const checkInstallation = () => {
+            const isExist = installApps.find(app => app.id === Number(id));
+            setIsInstalled(!!isExist);
+        };
+        checkInstallation();
+    }, [installApps, id]);
+
     const handleInstallApp = (app) => {
         const isExist = installApps.find(app => app.id === Number(id))
         if(isExist){
             toast.error(`${app.title} is already installed!`)
         }else{
             setInstallApps([...installApps, expectedApp])
+            setIsInstalled(true);
             toast.success(`${app.title} is installed successfully!`)
         }
     }
@@ -167,17 +178,29 @@ const AppDetails = () => {
                                     </div>
                                 </div>
 
-                                {/* Install Button */}
-                                <button 
-                                    onClick={() => handleInstallApp(expectedApp)} 
-                                    className='group cursor-pointer relative w-full md:w-auto px-8 py-3 rounded-full bg-gradient-to-r from-purple-600 to-blue-600 text-white font-semibold overflow-hidden shadow-lg hover:shadow-purple-500/25 transition-all duration-300 hover:scale-105'
-                                >
-                                    <span className='relative z-10 flex items-center justify-center gap-2'>
-                                        <PiDownloadSimpleBold className='text-xl group-hover:animate-bounce' />
-                                        <span>Install Now ({expectedApp?.size} MB)</span>
-                                    </span>
-                                    <div className='absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300'></div>
-                                </button>
+                                {/* Install Button - Conditionally styled based on installation status */}
+                                {!isInstalled ? (
+                                    <button 
+                                        onClick={() => handleInstallApp(expectedApp)} 
+                                        className='group cursor-pointer relative w-full md:w-auto px-8 py-3 rounded-full bg-gradient-to-r from-purple-600 to-blue-600 text-white font-semibold overflow-hidden shadow-lg hover:shadow-purple-500/25 transition-all duration-300 hover:scale-105'
+                                    >
+                                        <span className='relative z-10 flex items-center justify-center gap-2'>
+                                            <PiDownloadSimpleBold className='text-xl group-hover:animate-bounce' />
+                                            <span>Install Now ({expectedApp?.size} MB)</span>
+                                        </span>
+                                        <div className='absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300'></div>
+                                    </button>
+                                ) : (
+                                    <button 
+                                        disabled
+                                        className='group relative w-full md:w-auto px-8 py-3 rounded-full bg-gradient-to-r from-green-500 to-emerald-600 text-white font-semibold shadow-lg cursor-default'
+                                    >
+                                        <span className='relative z-10 flex items-center justify-center gap-2'>
+                                            <FaCheck className='text-xl' />
+                                            <span>Installed</span>
+                                        </span>
+                                    </button>
+                                )}
                             </div>
                         </div>
 
