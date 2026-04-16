@@ -1,6 +1,7 @@
 import React from 'react';
 import heroImg from "../assets/hero.png"
 import { FaAppStoreIos, FaGooglePlay, FaArrowRight } from 'react-icons/fa';
+import Image from 'next/image';
 
 const Banner = () => {
     return (
@@ -58,7 +59,7 @@ const Banner = () => {
 
                 {/* Hero Image - Smaller */}
                 <div className='mt-8 relative'>
-                    <img 
+                    <Image 
                         className='mx-auto relative z-10 hover:scale-105 transition-transform duration-500 cursor-pointer max-w-lg md:max-w-2xl' 
                         src={heroImg} 
                         alt="Hero illustration" 

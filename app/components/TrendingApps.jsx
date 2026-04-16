@@ -1,21 +1,15 @@
+"use client"
+
 import React, { use, useEffect, useState } from 'react';
-import { Link, useLoaderData } from 'react-router';
+// import { useLoaderData } from 'react-router';
 import AppCard from './AppCard';
 import { HashLoader } from 'react-spinners';
 import useApps from '../hooks/useApps';
+import Link from 'next/link';
 
 const appsPromise = fetch("/data.json").then((res) => res.json())
 const TrendingApps = () => {
 
-    // Way => 1
-    // const apps = use(appsPromise)
-    // console.log(apps);
-
-    // Way => 2
-    // const data = useLoaderData()
-    // console.log(data);
-
-    // Way => 3
     const {apps, loading} = useApps()
     
     
@@ -55,7 +49,7 @@ const TrendingApps = () => {
                         
                         {/* View All Button */}
                         <div className='text-center mt-12'>
-                            <Link to={"/apps"}>
+                            <Link href="/apps">
                                 <button className='group relative px-8 py-3 rounded-full bg-gradient-to-r cursor-pointer from-purple-600 to-blue-600 text-white font-semibold overflow-hidden shadow-lg hover:shadow-purple-500/25 transition-all duration-300 hover:scale-105'>
                                     <span className='relative z-10 flex items-center gap-2'>
                                         <span>View All Apps</span>

@@ -1,12 +1,13 @@
+import Image from 'next/image';
+import Link from 'next/link';
 import React from 'react';
 import { FaStar, FaDownload } from 'react-icons/fa';
 import { PiDownloadSimpleBold } from 'react-icons/pi';
-import { Link } from 'react-router';
 
 const AppCard = ({app}) => {
     return (
         <Link 
-            to={`/apps/${app.id}`} 
+            href={`/apps/${app.id}`}
             className='group relative bg-white/80 backdrop-blur-md rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-105 cursor-pointer border border-gray-100'
         >
             {/* Gradient Overlay on Hover */}
@@ -14,7 +15,7 @@ const AppCard = ({app}) => {
             
             {/* Image Container */}
             <div className='relative overflow-hidden bg-gradient-to-br from-purple-50 to-blue-50 p-6'>
-                <img 
+                <Image 
                     src={app.image} 
                     alt={app.title} 
                     className='w-full h-40 object-contain transform group-hover:scale-110 transition-transform duration-500'
