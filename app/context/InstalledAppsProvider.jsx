@@ -1,29 +1,33 @@
 "use client"
-import  { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { InstalledAppsContext } from './InstalledAppsContext';
 
-const InstalledAppsProvider = ({children}) => {
-    const [installApps, setInstallApps] = useState( () => {
-         const storedData = localStorage.getItem("myData");
-        return storedData ? JSON.parse(storedData) : [];
-  });
+const InstalledAppsProvider = ({ children }) => {
+  const [installApps, setInstallApps] = useState([]);
 
-
-    useEffect(() => {
-    localStorage.setItem("myData", JSON.stringify(installApps));
-  }, [installApps])
-
-
-    
-    const data = {
-        installApps,
-        setInstallApps,
+  // ✅ Load from localStorage (client only)
+  useEffect(() => {
+    const storedData = localStorage.getItem("myData");
+    if (storedData) {
+      setInstallApps(JSON.parse(storedData));
     }
-    return (
-        <InstalledAppsContext.Provider value={data}>
-            {children}
-        </InstalledAppsContext.Provider>
-    );
+  }, []);
+
+  // ✅ Save to localStorage
+  useEffect(() => {
+    localStorage.setItem("myData", JSON.stringify(installApps));
+  }, [installApps]);
+
+  const data = {
+    installApps,
+    setInstallApps,
+  };
+
+  return (
+    <InstalledAppsContext.Provider value={data}>
+      {children}
+    </InstalledAppsContext.Provider>
+  );
 };
 
 export default InstalledAppsProvider;
